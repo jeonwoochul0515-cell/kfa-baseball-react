@@ -1,0 +1,24 @@
+{
+  "name": "KFA 프랜차이즈 야구단",
+  "short_name": "KFA야구단",
+  "description": "한국프랜차이즈산업협회 부울경지회 KFA 프랜차이즈 야구단 공식 홈페이지",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#1a3a5c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

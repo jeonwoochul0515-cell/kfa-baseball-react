@@ -7,6 +7,8 @@ const navItems = [
   { label: '선수단', href: '#roster' },
   { label: '운영진', href: '#staff' },
   { label: '연혁', href: '#history' },
+  { label: '장비', href: '#equipment' },
+  { label: '회계', href: '#finance' },
   { label: '스폰서', href: '#sponsors' },
   { label: '회원사', href: '#members' },
 ];

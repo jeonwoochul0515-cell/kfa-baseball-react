@@ -8,6 +8,8 @@ import Staff from './components/Staff';
 import Timeline from './components/Timeline';
 import Sponsors from './components/Sponsors';
 import Members from './components/Members';
+import Equipment from './components/Equipment';
+import Finance from './components/Finance';
 import Footer from './components/Footer';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
       <Roster />
       <Staff />
       <Timeline />
+      <Equipment />
+      <Finance />
       <Sponsors />
       <Members />
       <Footer />
