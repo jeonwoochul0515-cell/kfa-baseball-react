@@ -89,6 +89,7 @@ export const players: Player[] = [
   { name: '박태우', number: '34', position: '외야수', brand: '명성가', height: 178, topSize: 120, bottomSize: 35, capSize: 60 },
   { name: '정영섭', number: '4', position: '내야수', brand: '케이닥', height: 180, topSize: 120, bottomSize: 36, capSize: 60, role: '4번타자 후보' },
   { name: '석용호', number: '0', position: '명예회원', brand: '', height: 175, topSize: 110, bottomSize: 33, capSize: 58, role: '포카리스웨트 1년 찬조' },
+  { name: '김창희', number: '0', position: '명예회원', brand: '법률사무소청송law', height: 168, topSize: 0, bottomSize: 0, capSize: 0 },
   { name: '김형민', number: '93', position: '외야수', brand: '도조도모', height: 170, topSize: 115, bottomSize: 33, capSize: 58, role: '95% 참석 목표' },
   { name: '문승우', number: '00', position: '투수', brand: '더상자', height: 180, topSize: 115, bottomSize: 34, capSize: 60, role: '코치겸 선수 (선출, 나풀)' },
   { name: '김영환', number: '72', position: '외야수', brand: '사해방', height: 178, topSize: 120, bottomSize: 35, capSize: 60, role: '회장' },
@@ -230,5 +231,5 @@ export const memberCompanies = [
   '하루솥밥', '공감부동산', '더상자', 'JJ푸드빌', '명성가',
   '호맥', '고기재이', '푸른뜨레', '호떡여장군', '이음푸드',
   '케이닥', '사해방', '세융푸드', '청송종합식품', '디에이블',
-  '금보물산', '도조도모',
+  '금보물산', '도조도모', '법률사무소청송law',
 ];
