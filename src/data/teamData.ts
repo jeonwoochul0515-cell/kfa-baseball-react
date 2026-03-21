@@ -155,6 +155,7 @@ export const sponsors: Sponsor[] = [
   { name: '금보물산', person: '안동석 대표', contribution: '회식비 찬조' },
   { name: '기라디자인', person: '김길하 대표', contribution: '야구단 로고/디자인 전담, 장비 개인 투자 84만원' },
   { name: '올바로갈비', person: '유종우 대표', contribution: '창단식 및 회식 장소 제공' },
+  { name: '법률사무소청송law', person: '김창희 변호사', contribution: '개막식 떡 4박스 후원' },
 ];
 
 // 연혁
