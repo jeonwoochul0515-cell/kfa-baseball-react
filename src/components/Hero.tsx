@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { matchResults, teamInfo } from '../data/teamData';
 
 export default function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const latestMatch = matchResults[0];
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const counters = statsRef.current?.querySelectorAll('.hero-stat-value');
@@ -39,6 +41,23 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
+      {/* Video Background */}
+      <div className={`hero-video-wrap ${videoLoaded ? 'loaded' : ''}`}>
+        <video
+          ref={videoRef}
+          className="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlay={() => setVideoLoaded(true)}
+        >
+          <source src="/kfa-highlight.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-video-overlay" />
+      </div>
+
       <div className="hero-content">
         <div className="hero-badge fade-up">
           <span className="dot" />
@@ -114,6 +133,12 @@ export default function Hero() {
           )}
         </div>
       )}
+
+      {/* Scroll indicator */}
+      <div className="hero-scroll-indicator">
+        <div className="hero-scroll-line" />
+        <span>SCROLL</span>
+      </div>
     </section>
   );
 }
