@@ -3,6 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Dynamic favicon generation for maximum browser compatibility
+      (function(){
+        var c=document.createElement('canvas');c.width=64;c.height=64;
+        var x=c.getContext('2d');
+        // Background
+        x.beginPath();x.arc(32,32,32,0,Math.PI*2);x.fillStyle='#1B2A4A';x.fill();
+        // Red ring
+        x.beginPath();x.arc(32,32,28,0,Math.PI*2);x.strokeStyle='#C8102E';x.lineWidth=3;x.stroke();
+        // K
+        x.strokeStyle='#fff';x.lineWidth=3.2;x.lineCap='round';x.lineJoin='round';
+        x.beginPath();x.moveTo(13,22);x.lineTo(13,42);x.stroke();
+        x.beginPath();x.moveTo(13,32);x.lineTo(22,22);x.stroke();
+        x.beginPath();x.moveTo(13,32);x.lineTo(22,42);x.stroke();
+        // F
+        x.strokeStyle='#C8102E';
+        x.beginPath();x.moveTo(26,42);x.lineTo(26,22);x.lineTo(36,22);x.stroke();
+        x.beginPath();x.moveTo(26,32);x.lineTo(34,32);x.stroke();
+        // A
+        x.strokeStyle='#fff';
+        x.beginPath();x.moveTo(39,42);x.lineTo(44.5,22);x.lineTo(50,42);x.stroke();
+        x.beginPath();x.moveTo(41,35);x.lineTo(48,35);x.stroke();
+        // Baseball
+        x.beginPath();x.arc(32,52,4.5,0,Math.PI*2);x.fillStyle='rgba(255,255,255,0.9)';x.fill();
+        // Set favicon
+        var link=document.querySelector("link[rel='icon']");
+        if(!link){link=document.createElement('link');link.rel='icon';document.head.appendChild(link);}
+        link.type='image/png';link.href=c.toDataURL('image/png');
+      })();
+    </script>
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

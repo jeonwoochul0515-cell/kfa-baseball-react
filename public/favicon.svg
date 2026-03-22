@@ -1,34 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1B2A4A"/>
-      <stop offset="100%" stop-color="#0d1a30"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#C8102E"/>
-      <stop offset="100%" stop-color="#E8394D"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F0CC6B"/>
-      <stop offset="100%" stop-color="#D4A843"/>
-    </linearGradient>
-  </defs>
-  <!-- Background circle -->
-  <circle cx="32" cy="32" r="32" fill="url(#bg)"/>
-  <!-- Red accent ring -->
-  <circle cx="32" cy="32" r="28" fill="none" stroke="url(#accent)" stroke-width="3"/>
-  <!-- Baseball stitches (subtle) -->
-  <path d="M 20 16 Q 28 22 20 32 Q 12 42 20 48" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity="0.3"/>
-  <path d="M 44 16 Q 36 22 44 32 Q 52 42 44 48" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity="0.3"/>
-  <!-- KFA Text -->
-  <!-- K -->
-  <path d="M 13 22 L 13 42 M 13 32 L 22 22 M 13 32 L 22 42" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- F -->
-  <path d="M 26 42 L 26 22 L 36 22 M 26 32 L 34 32" fill="none" stroke="url(#accent)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- A -->
-  <path d="M 39 42 L 44.5 22 L 50 42 M 41 35 L 48 35" fill="none" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Small baseball icon at bottom -->
-  <circle cx="32" cy="52" r="4.5" fill="white" opacity="0.9"/>
-  <path d="M 29.5 49.5 Q 32 51.5 29.5 54.5" fill="none" stroke="#C8102E" stroke-width="0.8" opacity="0.7"/>
-  <path d="M 34.5 49.5 Q 32 51.5 34.5 54.5" fill="none" stroke="#C8102E" stroke-width="0.8" opacity="0.7"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<circle cx="32" cy="32" r="32" fill="#1B2A4A"/>
+<circle cx="32" cy="32" r="28" fill="none" stroke="#C8102E" stroke-width="3"/>
+<path d="M13 22L13 42M13 32L22 22M13 32L22 42" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M26 42L26 22L36 22M26 32L34 32" stroke="#C8102E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M39 42L44.5 22L50 42M41 35L48 35" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<circle cx="32" cy="52" r="4.5" fill="#fff" opacity="0.9"/>
+<path d="M29.5 49.5Q32 51.5 29.5 54.5" stroke="#C8102E" stroke-width="0.8" fill="none"/>
+<path d="M34.5 49.5Q32 51.5 34.5 54.5" stroke="#C8102E" stroke-width="0.8" fill="none"/>
 </svg>
