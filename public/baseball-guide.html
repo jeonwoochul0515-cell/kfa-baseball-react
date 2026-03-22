@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사회인 야구 수비 가이드 - 비주얼 에디션</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #2d5016;
+    --grass: #4a8c2a;
+    --dirt: #c4956a;
+    --white: #ffffff;
+    --dark: #1a1a2e;
+    --accent: #e94560;
+    --blue: #0f3460;
+    --gold: #f5a623;
+    --card-bg: #16213e;
+    --card-border: #0f3460;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0a23 0%, #1a1a3e 50%, #0d2137 100%);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(74,140,42,0.15) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #4a8c2a, #f5a623);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    color: #aaa;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    animation: bounce 2s infinite;
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 0.8rem 2rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+
+  .nav a:hover { color: var(--gold); background: rgba(245,166,35,0.1); }
+
+  /* Section Styles */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+
+  .section-subtitle {
+    color: #888;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+
+  /* Card Grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card .card-number {
+    position: absolute;
+    top: -10px; right: 10px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+  }
+
+  .card p { color: #ccc; font-size: 0.95rem; }
+
+  .card .tag {
+    display: inline-block;
+    background: rgba(233,69,96,0.15);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .card .tag.green { background: rgba(74,140,42,0.15); color: #6bce3a; }
+  .card .tag.blue { background: rgba(15,52,96,0.3); color: #5bc0eb; }
+
+  /* Baseball Field SVG */
+  .field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  .field-svg {
+    max-width: 100%;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
+  }
+
+  .field-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  /* Animated Play Diagrams */
+  .play-diagram {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .play-diagram h3 {
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .play-diagram .description {
+    color: #ccc;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Animated elements */
+  @keyframes throwBall {
+    0% { cx: 300; cy: 340; opacity: 1; }
+    50% { cx: 250; cy: 250; opacity: 1; }
+    100% { cx: 200; cy: 160; opacity: 1; }
+  }
+
+  @keyframes runBases {
+    0% { transform: translate(0, 0); }
+    33% { transform: translate(-110px, -110px); }
+    66% { transform: translate(0, -220px); }
+    100% { transform: translate(110px, -110px); }
+  }
+
+  @keyframes movePlayer {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  @keyframes dashLine {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .animated-path {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: dashLine 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { r: 8; opacity: 0.8; }
+    50% { r: 12; opacity: 1; }
+  }
+
+  .pulse-dot {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes groundBall {
+    0% { cx: 300; cy: 370; }
+    100% { cx: 200; cy: 270; }
+  }
+
+  @keyframes catchAndThrow {
+    0% { cx: 200; cy: 270; }
+    40% { cx: 200; cy: 270; }
+    100% { cx: 400; cy: 270; }
+  }
+
+  /* Position Cards */
+  .position-section {
+    margin: 3rem 0;
+  }
+
+  .position-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .position-icon {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .position-icon.pitcher { background: linear-gradient(135deg, #e94560, #c23152); }
+  .position-icon.catcher { background: linear-gradient(135deg, #0f3460, #1a4f8a); }
+  .position-icon.infield { background: linear-gradient(135deg, #f5a623, #e8961e); }
+  .position-icon.outfield { background: linear-gradient(135deg, #4a8c2a, #3d7522); }
+
+  .tip-list {
+    list-style: none;
+  }
+
+  .tip-list li {
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    transition: background 0.3s;
+  }
+
+  .tip-list li:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  .tip-list li strong {
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .tip-list li span {
+    color: #bbb;
+    font-size: 0.9rem;
+  }
+
+  /* Drill Section */
+  .drill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .drill-card {
+    background: linear-gradient(135deg, rgba(74,140,42,0.1), rgba(15,52,96,0.1));
+    border: 1px solid rgba(74,140,42,0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .drill-card h4 {
+    color: #6bce3a;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .drill-card .time {
+    display: inline-block;
+    background: rgba(74,140,42,0.2);
+    color: #6bce3a;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .drill-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+
+  /* Trivia */
+  .trivia-card {
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(233,69,96,0.05));
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .trivia-card:hover {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(233,69,96,0.08));
+  }
+
+  .trivia-card .q {
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .trivia-card .a {
+    color: #bbb;
+    font-size: 0.9rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .trivia-card.open .a {
+    max-height: 200px;
+  }
+
+  .trivia-card .hint {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  /* Interactive Field */
+  .interactive-field {
+    position: relative;
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+
+  .field-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .field-btn {
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+
+  .field-btn:hover, .field-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .situation-info {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    min-height: 120px;
+  }
+
+  .situation-info h4 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .situation-info p {
+    color: #bbb;
+    font-size: 0.9rem;
+  }
+
+  .situation-info ul {
+    color: #bbb;
+    font-size: 0.9rem;
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .situation-info li {
+    margin-bottom: 0.3rem;
+  }
+
+  /* Summary Box */
+  .summary-box {
+    background: linear-gradient(135deg, rgba(233,69,96,0.1), rgba(245,166,35,0.1));
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+
+  .summary-box h3 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-box .four-keys {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .key-item {
+    background: rgba(0,0,0,0.2);
+    padding: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .key-item .emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+  .key-item .label { color: var(--gold); font-weight: 700; font-size: 1rem; }
+  .key-item .desc { color: #aaa; font-size: 0.8rem; margin-top: 0.3rem; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #555;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .nav { padding: 0.5rem 1rem; }
+    section { padding: 3rem 1rem; }
+  }
+
+  /* Scroll animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Step indicator */
+  .step-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+  .step {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #ccc;
+    text-align: center;
+    min-width: 100px;
+  }
+  .step strong { color: var(--gold); display: block; margin-bottom: 0.2rem; }
+  .step-arrow {
+    font-size: 1.5rem;
+    color: var(--accent);
+    padding: 0 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#rules">규칙 상식</a>
+  <a href="#field-overview">수비 포지션</a>
+  <a href="#plays">상황별 플레이</a>
+  <a href="#interactive">인터랙티브</a>
+  <a href="#drills">연습 메뉴</a>
+  <a href="#trivia">트리비아</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>사회인 야구 수비 가이드</h1>
+  <p>4부리그 선수들이 모를 수 있는 야구 상식과 수비 노하우를 시각적으로 쉽게 이해하세요</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+    <span style="background:rgba(233,69,96,0.15);color:#e94560;padding:0.5rem 1rem;border-radius:20px;font-size:0.9rem">규칙 7가지</span>
+    <span style="background:rgba(74,140,42,0.15);color:#6bce3a;padding:0.5rem 1rem;border-radius:20px;font-size:0.9rem">포지션별 노하우</span>
+    <span style="background:rgba(245,166,35,0.15);color:#f5a623;padding:0.5rem 1rem;border-radius:20px;font-size:0.9rem">애니메이션 다이어그램</span>
+  </div>
+  <div class="scroll-hint">&#8595;</div>
+</div>
+
+<!-- Section 1: Rules -->
+<section id="rules">
+  <h2 class="section-title fade-in">Part 1. 이것도 몰랐어?</h2>
+  <p class="section-subtitle fade-in">4부리그에서 자주 틀리는 의외의 규칙들</p>
+
+  <div class="card-grid">
+
+    <div class="card fade-in">
+      <span class="card-number">01</span>
+      <span class="tag">중요</span>
+      <h3>인필드 플라이 룰</h3>
+      <p><strong style="color:#f5a623">상황:</strong> 무사/1사, 주자 1·2루 또는 만루</p>
+      <p>내야 플라이 → <strong style="color:#e94560">타자 자동 아웃!</strong></p>
+      <svg viewBox="0 0 300 200" style="margin-top:1rem;width:100%">
+        <rect width="300" height="200" fill="#1a2a1a" rx="8"/>
+        <!-- 다이아몬드 -->
+        <polygon points="150,30 250,110 150,190 50,110" fill="none" stroke="#4a8c2a" stroke-width="2"/>
+        <!-- 베이스 -->
+        <rect x="145" y="185" width="10" height="10" fill="white" transform="rotate(45,150,190)"/>
+        <rect x="245" y="105" width="10" height="10" fill="white" transform="rotate(45,250,110)"/>
+        <rect x="145" y="25" width="10" height="10" fill="white" transform="rotate(45,150,30)"/>
+        <rect x="45" y="105" width="10" height="10" fill="white" transform="rotate(45,50,110)"/>
+        <!-- 주자 표시 -->
+        <circle cx="250" cy="110" r="8" fill="#e94560" class="pulse-dot"/>
+        <circle cx="150" cy="30" r="8" fill="#e94560" class="pulse-dot"/>
+        <text x="260" y="100" fill="#e94560" font-size="10">주자</text>
+        <text x="160" y="25" fill="#e94560" font-size="10">주자</text>
+        <!-- 공 궤적 -->
+        <circle cx="150" cy="130" r="5" fill="#f5a623">
+          <animate attributeName="cy" values="190;100;100" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="r" values="4;6;6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <text x="100" y="80" fill="#f5a623" font-size="11" font-weight="bold">AUTO OUT!</text>
+        <!-- X 마크 -->
+        <line x1="135" y1="65" x2="165" y2="95" stroke="#e94560" stroke-width="3">
+          <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="165" y1="65" x2="135" y2="95" stroke="#e94560" stroke-width="3">
+          <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite"/>
+        </line>
+      </svg>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:#888">내야수가 일부러 떨어뜨려 더블플레이를 방지하는 규칙. 주자는 뛰어도 되지만 위험!</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">02</span>
+      <span class="tag green">득점 기회</span>
+      <h3>파울 플라이 태그업</h3>
+      <p>파울 플라이를 야수가 잡아도 <strong style="color:#6bce3a">태그업 후 진루 가능!</strong></p>
+      <svg viewBox="0 0 300 200" style="margin-top:1rem;width:100%">
+        <rect width="300" height="200" fill="#1a2a1a" rx="8"/>
+        <polygon points="150,30 250,110 150,190 50,110" fill="none" stroke="#4a8c2a" stroke-width="2"/>
+        <rect x="145" y="185" width="10" height="10" fill="white" transform="rotate(45,150,190)"/>
+        <rect x="45" y="105" width="10" height="10" fill="white" transform="rotate(45,50,110)"/>
+        <!-- 3루 주자 -->
+        <circle cx="50" cy="110" r="8" fill="#6bce3a" class="pulse-dot"/>
+        <!-- 파울 영역 공 -->
+        <circle r="5" fill="#f5a623">
+          <animate attributeName="cx" values="150;30;30" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="190;150;150" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <text x="10" y="140" fill="#888" font-size="9">FOUL ZONE</text>
+        <!-- 태그업 화살표 -->
+        <line x1="50" y1="115" x2="130" y2="185" stroke="#6bce3a" stroke-width="2" stroke-dasharray="5,5">
+          <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <text x="60" y="170" fill="#6bce3a" font-size="11" font-weight="bold">TAG UP!</text>
+        <text x="100" y="185" fill="#6bce3a" font-size="10">SCORE!</text>
+      </svg>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:#888">4부에서 이걸 아는 주자는 거의 없음. 연습하면 숨은 득점 기회!</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">03</span>
+      <span class="tag">필수 암기</span>
+      <h3>3스트라이크 낫아웃</h3>
+      <p><strong style="color:#f5a623">1루 비어있거나 2아웃</strong>일 때, 포수가 3번째 스트라이크를 놓치면?</p>
+      <svg viewBox="0 0 300 160" style="margin-top:1rem;width:100%">
+        <rect width="300" height="160" fill="#1a2a1a" rx="8"/>
+        <!-- 홈플레이트 -->
+        <polygon points="150,120 140,130 145,140 155,140 160,130" fill="white" opacity="0.8"/>
+        <!-- 포수 -->
+        <circle cx="150" cy="148" r="10" fill="#0f3460"/>
+        <text x="135" y="152" fill="white" font-size="8">포수</text>
+        <!-- 공 떨어짐 -->
+        <circle r="4" fill="#e94560">
+          <animate attributeName="cx" values="150;155;160" dur="1.5s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="130;145;155" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <text x="165" y="150" fill="#e94560" font-size="9">놓침!</text>
+        <!-- 타자 달리기 -->
+        <circle r="8" fill="#6bce3a">
+          <animate attributeName="cx" values="140;200;250" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="130;120;110" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- 1루 -->
+        <rect x="260" y="100" width="12" height="12" fill="white" transform="rotate(45,266,106)"/>
+        <text x="245" y="95" fill="#6bce3a" font-size="10" font-weight="bold">1루로!</text>
+        <!-- 화살표 -->
+        <line x1="145" y1="125" x2="255" y2="105" stroke="#6bce3a" stroke-width="1.5" stroke-dasharray="4,4">
+          <animate attributeName="stroke-dashoffset" from="16" to="0" dur="1s" repeatCount="indefinite"/>
+        </line>
+      </svg>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:#888">포수는 반드시 확인 태그 또는 1루 송구 필요!</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">04</span>
+      <span class="tag blue">주의</span>
+      <h3>주자가 타구에 맞으면?</h3>
+      <div style="display:flex;gap:1rem;margin-top:1rem">
+        <div style="flex:1;background:rgba(233,69,96,0.1);padding:1rem;border-radius:8px">
+          <div style="color:#e94560;font-weight:700;font-size:0.9rem;margin-bottom:0.3rem">내야수 앞</div>
+          <div style="font-size:0.85rem;color:#ccc">주자 아웃</div>
+          <div style="font-size:0.85rem;color:#ccc">타자 1루</div>
+        </div>
+        <div style="flex:1;background:rgba(107,206,58,0.1);padding:1rem;border-radius:8px">
+          <div style="color:#6bce3a;font-weight:700;font-size:0.9rem;margin-bottom:0.3rem">내야수 통과 후</div>
+          <div style="font-size:0.85rem;color:#ccc">아웃 아님</div>
+          <div style="font-size:0.85rem;color:#ccc">볼 인 플레이</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">05</span>
+      <span class="tag">보크</span>
+      <h3>보크(Balk) 3대 유형</h3>
+      <div style="margin-top:0.8rem">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+          <span style="color:#e94560;font-size:1.2rem">1</span>
+          <span style="color:#ccc;font-size:0.9rem">세트 포지션에서 <strong style="color:#f5a623">완전 정지 없이</strong> 투구</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+          <span style="color:#e94560;font-size:1.2rem">2</span>
+          <span style="color:#ccc;font-size:0.9rem">1루 향해 <strong style="color:#f5a623">발을 떼지 않고</strong> 송구</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+          <span style="color:#e94560;font-size:1.2rem">3</span>
+          <span style="color:#ccc;font-size:0.9rem">투수판 위에서 <strong style="color:#f5a623">공을 떨어뜨림</strong></span>
+        </div>
+      </div>
+      <p style="margin-top:0.5rem;color:#e94560;font-size:0.85rem;font-weight:700">결과: 모든 주자 1개 진루!</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">06</span>
+      <span class="tag green">절대 금지</span>
+      <h3>글러브를 던져서 타구를 맞히면?</h3>
+      <p style="margin-top:0.5rem"><strong style="color:#e94560;font-size:1.3rem">3베이스</strong>가 주어집니다!</p>
+      <p style="margin-top:0.5rem;color:#888;font-size:0.85rem">모자도 마찬가지. 절대 장비를 던지지 마세요.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">07</span>
+      <span class="tag blue">어필 플레이</span>
+      <h3>타격 순서 실수</h3>
+      <p>상대가 <strong style="color:#f5a623">어필하면</strong> → 해당 타자 아웃</p>
+      <p>어필 전 다음 타자가 초구 받으면 → <strong style="color:#6bce3a">그냥 통과</strong></p>
+      <p style="margin-top:0.5rem;color:#888;font-size:0.85rem">4부리그에서 타순 실수는 생각보다 자주 발생합니다</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Section 2: Field Overview -->
+<section id="field-overview">
+  <h2 class="section-title fade-in">Part 2. 수비 포지션 한눈에 보기</h2>
+  <p class="section-subtitle fade-in">클릭하면 포지션별 노하우를 확인하세요</p>
+
+  <div class="field-container fade-in">
+    <svg viewBox="0 0 600 500" class="field-svg" style="max-width:600px">
+      <!-- 외야 잔디 -->
+      <path d="M 300 400 L 50 150 Q 300 -50 550 150 Z" fill="#3a7a1a"/>
+      <!-- 내야 흙 -->
+      <path d="M 300 400 L 180 280 Q 300 170 420 280 Z" fill="#c4956a"/>
+      <!-- 내야 잔디 -->
+      <path d="M 300 350 L 220 280 Q 300 210 380 280 Z" fill="#4a9c2a"/>
+      <!-- 베이스라인 -->
+      <line x1="300" y1="400" x2="180" y2="280" stroke="white" stroke-width="1.5" opacity="0.5"/>
+      <line x1="300" y1="400" x2="420" y2="280" stroke="white" stroke-width="1.5" opacity="0.5"/>
+      <!-- 마운드 -->
+      <circle cx="300" cy="310" r="12" fill="#d4a574"/>
+      <!-- 베이스 -->
+      <rect x="295" y="395" width="12" height="12" fill="white" transform="rotate(45,301,401)"/>
+      <rect x="413" y="275" width="12" height="12" fill="white" transform="rotate(45,419,281)"/>
+      <rect x="295" y="185" width="12" height="12" fill="white" transform="rotate(45,301,191)"/>
+      <rect x="175" y="275" width="12" height="12" fill="white" transform="rotate(45,181,281)"/>
+
+      <!-- 선수 위치 (클릭 가능) -->
+      <!-- 투수 -->
+      <circle cx="300" cy="310" r="14" fill="#e94560" opacity="0.9" class="pos-marker" data-pos="pitcher" style="cursor:pointer">
+        <animate attributeName="r" values="14;16;14" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <text x="300" y="314" fill="white" font-size="10" text-anchor="middle" font-weight="bold" style="pointer-events:none">P</text>
+
+      <!-- 포수 -->
+      <circle cx="300" cy="430" r="14" fill="#0f3460" opacity="0.9" class="pos-marker" data-pos="catcher" style="cursor:pointer"/>
+      <text x="300" y="434" fill="white" font-size="10" text-anchor="middle" font-weight="bold" style="pointer-events:none">C</text>
+
+      <!-- 1루수 -->
+      <circle cx="400" cy="290" r="14" fill="#f5a623" opacity="0.9" class="pos-marker" data-pos="first" style="cursor:pointer"/>
+      <text x="400" y="294" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">1B</text>
+
+      <!-- 2루수 -->
+      <circle cx="360" cy="240" r="14" fill="#f5a623" opacity="0.9" class="pos-marker" data-pos="second" style="cursor:pointer"/>
+      <text x="360" y="244" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">2B</text>
+
+      <!-- 유격수 -->
+      <circle cx="240" cy="240" r="14" fill="#f5a623" opacity="0.9" class="pos-marker" data-pos="short" style="cursor:pointer"/>
+      <text x="240" y="244" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">SS</text>
+
+      <!-- 3루수 -->
+      <circle cx="200" cy="290" r="14" fill="#f5a623" opacity="0.9" class="pos-marker" data-pos="third" style="cursor:pointer"/>
+      <text x="200" y="294" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">3B</text>
+
+      <!-- 좌익수 -->
+      <circle cx="130" cy="150" r="14" fill="#4a8c2a" opacity="0.9" class="pos-marker" data-pos="left" style="cursor:pointer"/>
+      <text x="130" y="154" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">LF</text>
+
+      <!-- 중견수 -->
+      <circle cx="300" cy="100" r="14" fill="#4a8c2a" opacity="0.9" class="pos-marker" data-pos="center" style="cursor:pointer"/>
+      <text x="300" y="104" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">CF</text>
+
+      <!-- 우익수 -->
+      <circle cx="470" cy="150" r="14" fill="#4a8c2a" opacity="0.9" class="pos-marker" data-pos="right" style="cursor:pointer"/>
+      <text x="470" y="154" fill="white" font-size="9" text-anchor="middle" font-weight="bold" style="pointer-events:none">RF</text>
+    </svg>
+
+    <div class="field-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#e94560"></div>투수</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0f3460"></div>포수</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div>내야수</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4a8c2a"></div>외야수</div>
+    </div>
+  </div>
+
+  <!-- 포지션별 정보 팝업 영역 -->
+  <div id="position-detail" class="situation-info" style="max-width:600px;margin:1rem auto">
+    <h4>포지션을 클릭해 보세요!</h4>
+    <p>위 다이어그램의 선수 위치를 클릭하면 해당 포지션의 수비 노하우가 표시됩니다.</p>
+  </div>
+
+  <!-- 포지션별 상세 노하우 -->
+  <div class="position-section fade-in">
+    <div class="position-header">
+      <div class="position-icon pitcher">P</div>
+      <div>
+        <h3 style="color:var(--accent)">투수 (Pitcher)</h3>
+        <p style="color:#888;font-size:0.85rem">투구 후 9번째 야수가 되는 순간</p>
+      </div>
+    </div>
+    <ul class="tip-list">
+      <li>
+        <strong>PFP (Pitcher's Fielding Practice)</strong>
+        <span>투구 후 반드시 수비 자세로 복귀. 4부에서 가장 큰 차이를 만드는 기본기</span>
+      </li>
+      <li>
+        <strong>1루 커버: 호를 그려라</strong>
+        <span>1루수가 잡으러 가면 투수가 1루 베이스 커버. 직선이 아닌 호(弧)를 그리며 접근해야 베이스라인과 평행하게 달릴 수 있음</span>
+        <div class="step-flow" style="margin-top:1rem">
+          <div class="step"><strong>타구</strong>1루 방향</div>
+          <div class="step-arrow">&rarr;</div>
+          <div class="step"><strong>투수</strong>호를 그리며 이동</div>
+          <div class="step-arrow">&rarr;</div>
+          <div class="step"><strong>1루 커버</strong>라인과 평행 진입</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="position-section fade-in">
+    <div class="position-header">
+      <div class="position-icon catcher">C</div>
+      <div>
+        <h3 style="color:#5bc0eb">포수 (Catcher)</h3>
+        <p style="color:#888;font-size:0.85rem">그라운드의 지휘관</p>
+      </div>
+    </div>
+    <ul class="tip-list">
+      <li>
+        <strong>프레이밍 (Framing)</strong>
+        <span>글러브를 스트라이크존 쪽으로 미세하게 당겨서 받기. 심판 판정에 실제로 영향을 줌!</span>
+      </li>
+      <li>
+        <strong>블로킹: 몸으로 막아라</strong>
+        <span>무릎을 떨어뜨리고 글러브를 다리 사이에. 절대 글러브로 잡으려 하지 말 것!</span>
+        <div style="display:flex;gap:1rem;margin-top:0.8rem">
+          <div style="flex:1;text-align:center;background:rgba(233,69,96,0.1);padding:0.8rem;border-radius:8px">
+            <div style="font-size:1.5rem">&#10060;</div>
+            <div style="font-size:0.8rem;color:#e94560;margin-top:0.3rem">글러브로 잡기</div>
+          </div>
+          <div style="flex:1;text-align:center;background:rgba(107,206,58,0.1);padding:0.8rem;border-radius:8px">
+            <div style="font-size:1.5rem">&#9989;</div>
+            <div style="font-size:0.8rem;color:#6bce3a;margin-top:0.3rem">몸으로 차단</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <strong>팝업: 스핀을 기억하라</strong>
+        <span>포수 뒤 팝업은 스핀 때문에 필드 쪽으로 돌아옴. 등을 필드 쪽으로 향하고 잡기!</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="position-section fade-in">
+    <div class="position-header">
+      <div class="position-icon infield">IF</div>
+      <div>
+        <h3 style="color:var(--gold)">내야수 공통</h3>
+        <p style="color:#888;font-size:0.85rem">땅볼 처리의 기본</p>
+      </div>
+    </div>
+
+    <!-- 땅볼 처리 시각적 가이드 -->
+    <div class="play-diagram">
+      <h3>땅볼 펀더멘탈 5단계</h3>
+      <div class="step-flow">
+        <div class="step"><strong>Step 1</strong>정면 이동</div>
+        <div class="step-arrow">&rarr;</div>
+        <div class="step"><strong>Step 2</strong>무릎 낮추기</div>
+        <div class="step-arrow">&rarr;</div>
+        <div class="step"><strong>Step 3</strong>글러브 바닥</div>
+        <div class="step-arrow">&rarr;</div>
+        <div class="step"><strong>Step 4</strong>양손 캐치</div>
+        <div class="step-arrow">&rarr;</div>
+        <div class="step"><strong>Step 5</strong>스텝 & 송구</div>
+      </div>
+      <p class="description">글러브는 반드시 <strong style="color:#f5a623">땅에 붙이고</strong> 대기. 공을 <strong style="color:#f5a623">몸 앞</strong>에서 처리하는 것이 핵심!</p>
+    </div>
+
+    <ul class="tip-list">
+      <li>
+        <strong>포스 플레이 vs 태그 플레이 판단</strong>
+        <span>포스 상황 = 베이스만 밟으면 OK. 포스가 아니면 반드시 태그! 이 판단 실수가 4부에서 가장 많습니다.</span>
+        <div style="display:flex;gap:1rem;margin-top:0.8rem">
+          <div style="flex:1;background:rgba(245,166,35,0.1);padding:0.8rem;border-radius:8px">
+            <div style="color:#f5a623;font-weight:700;font-size:0.9rem">포스 (Force)</div>
+            <div style="color:#ccc;font-size:0.8rem;margin-top:0.2rem">뒤에 주자가 밀려오는 상황<br/>베이스만 밟으면 아웃</div>
+          </div>
+          <div style="flex:1;background:rgba(91,192,235,0.1);padding:0.8rem;border-radius:8px">
+            <div style="color:#5bc0eb;font-weight:700;font-size:0.9rem">태그 (Tag)</div>
+            <div style="color:#ccc;font-size:0.8rem;margin-top:0.2rem">포스가 아닌 상황<br/>반드시 주자 몸에 터치</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <strong>릴레이 위치의 철칙</strong>
+        <span>외야 → 목표 베이스 직선 위에 서야 함. 중계수는 몸을 목표 방향으로 열고 서기</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="position-section fade-in">
+    <div class="position-header">
+      <div class="position-icon outfield">OF</div>
+      <div>
+        <h3 style="color:#6bce3a">외야수 (Outfielders)</h3>
+        <p style="color:#888;font-size:0.85rem">첫 발이 모든 것을 결정한다</p>
+      </div>
+    </div>
+
+    <!-- 외야수 첫 발 방향 다이어그램 -->
+    <div class="play-diagram">
+      <h3>외야수의 황금률: 첫 발은 뒤로!</h3>
+      <svg viewBox="0 0 400 250" style="max-width:400px;margin:0 auto;display:block">
+        <rect width="400" height="250" fill="#1a2a1a" rx="8"/>
+        <!-- 외야수 -->
+        <circle cx="200" cy="180" r="12" fill="#4a8c2a"/>
+        <text x="200" y="184" fill="white" font-size="9" text-anchor="middle">OF</text>
+
+        <!-- 뒤로 빠지는 화살표 (올바른 방향) -->
+        <line x1="200" y1="165" x2="200" y2="80" stroke="#6bce3a" stroke-width="3" marker-end="url(#arrowGreen)"/>
+        <text x="210" y="120" fill="#6bce3a" font-size="12" font-weight="bold">BACK!</text>
+        <text x="240" y="135" fill="#6bce3a" font-size="9">뒤에서 앞으로</text>
+        <text x="240" y="148" fill="#6bce3a" font-size="9">달려와 잡을 수 있음</text>
+
+        <!-- 앞으로 가는 방향 (잘못된 예) -->
+        <line x1="200" y1="195" x2="200" y2="240" stroke="#e94560" stroke-width="2" stroke-dasharray="5,5"/>
+        <text x="210" y="230" fill="#e94560" font-size="10">머리 위 넘어가면 끝!</text>
+
+        <text x="120" y="50" fill="#f5a623" font-size="11" font-weight="bold">타구 소리 → 뒤로!</text>
+
+        <defs>
+          <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#6bce3a"/>
+          </marker>
+        </defs>
+      </svg>
+      <p class="description" style="margin-top:1rem">앞으로 오는 건 뒤에서 달려와 잡을 수 있지만, <strong style="color:#e94560">머리 위를 넘어가면 끝</strong>입니다.</p>
+    </div>
+
+    <ul class="tip-list">
+      <li>
+        <strong>크로스 오버 스텝으로 출발</strong>
+        <span>옆으로 갈 때 사이드 스텝은 느림! 크로스 오버 스텝으로 방향 전환해야 속도 손실 없음</span>
+        <div class="step-flow" style="margin-top:0.8rem">
+          <div class="step" style="border:1px solid #e94560"><strong style="color:#e94560">&#10060;</strong>사이드 스텝</div>
+          <div class="step-arrow">vs</div>
+          <div class="step" style="border:1px solid #6bce3a"><strong style="color:#6bce3a">&#9989;</strong>크로스 오버</div>
+        </div>
+      </li>
+      <li>
+        <strong>백업 습관 — 항상 움직여라</strong>
+        <span>타구가 자기 쪽이 아니어도 반드시 백업 포지션으로 이동!</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-top:0.8rem;text-align:center">
+          <div style="background:rgba(255,255,255,0.03);padding:0.6rem;border-radius:6px">
+            <div style="color:#6bce3a;font-weight:700;font-size:0.85rem">좌익수</div>
+            <div style="color:#aaa;font-size:0.8rem">3루 백업</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:0.6rem;border-radius:6px">
+            <div style="color:#6bce3a;font-weight:700;font-size:0.85rem">중견수</div>
+            <div style="color:#aaa;font-size:0.8rem">좌·우 백업</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:0.6rem;border-radius:6px">
+            <div style="color:#6bce3a;font-weight:700;font-size:0.85rem">우익수</div>
+            <div style="color:#aaa;font-size:0.8rem">1루 백업</div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <strong>크로우 홉 (Crow Hop)</strong>
+        <span>잡은 뒤 한 번 작게 점프하며 송구 자세를 만드는 기술. 어깨 부담 줄이고 정확도 상승!</span>
+        <div class="step-flow" style="margin-top:0.8rem">
+          <div class="step"><strong>캐치</strong>양손으로</div>
+          <div class="step-arrow">&rarr;</div>
+          <div class="step"><strong>홉</strong>작은 점프</div>
+          <div class="step-arrow">&rarr;</div>
+          <div class="step"><strong>스텝</strong>목표 방향</div>
+          <div class="step-arrow">&rarr;</div>
+          <div class="step"><strong>송구</strong>강하고 정확</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Section 3: Situation Plays -->
+<section id="plays">
+  <h2 class="section-title fade-in">Part 3. 상황별 수비 플레이</h2>
+  <p class="section-subtitle fade-in">애니메이션으로 보는 팀 수비 약속</p>
+
+  <!-- 컷오프 체계 -->
+  <div class="play-diagram fade-in">
+    <h3>컷오프(중계) 체계</h3>
+    <svg viewBox="0 0 500 350" style="max-width:500px;margin:1rem auto;display:block">
+      <rect width="500" height="350" fill="#1a2a1a" rx="8"/>
+
+      <!-- 외야 -->
+      <ellipse cx="100" cy="80" rx="25" ry="25" fill="#4a8c2a" opacity="0.8"/>
+      <text x="100" y="85" fill="white" font-size="10" text-anchor="middle">외야수</text>
+
+      <!-- 중계수 -->
+      <ellipse cx="250" cy="170" rx="25" ry="25" fill="#f5a623" opacity="0.8"/>
+      <text x="250" y="175" fill="white" font-size="10" text-anchor="middle">중계수</text>
+
+      <!-- 홈 -->
+      <polygon points="420,290 410,300 415,310 425,310 430,300" fill="white"/>
+      <ellipse cx="420" cy="320" rx="20" ry="20" fill="#0f3460"/>
+      <text x="420" y="325" fill="white" font-size="10" text-anchor="middle">포수</text>
+
+      <!-- 공 이동 애니메이션 -->
+      <circle r="6" fill="#e94560">
+        <animate attributeName="cx" values="100;250;420" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="80;170;290" dur="3s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 경로선 -->
+      <line x1="120" y1="95" x2="230" y2="155" stroke="#f5a623" stroke-width="2" stroke-dasharray="8,4">
+        <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="270" y1="185" x2="405" y2="290" stroke="#f5a623" stroke-width="2" stroke-dasharray="8,4">
+        <animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/>
+      </line>
+
+      <!-- 콜 표시 -->
+      <rect x="300" y="220" width="120" height="60" rx="8" fill="rgba(0,0,0,0.5)" stroke="#f5a623" stroke-width="1"/>
+      <text x="360" y="240" fill="#f5a623" font-size="11" text-anchor="middle" font-weight="bold">콜 체계</text>
+      <text x="360" y="255" fill="#6bce3a" font-size="10" text-anchor="middle">"컷!" → 잡고 멈춤</text>
+      <text x="360" y="270" fill="#5bc0eb" font-size="10" text-anchor="middle">"릴레이!" → 중계 송구</text>
+    </svg>
+    <p class="description">중계수는 외야수와 목표 베이스의 <strong style="color:#f5a623">직선상</strong>에 위치. 포수/벤치에서 콜!</p>
+  </div>
+
+  <!-- 번트 수비 시프트 -->
+  <div class="play-diagram fade-in">
+    <h3>번트 수비 시프트 (주자 1루)</h3>
+    <svg viewBox="0 0 500 400" style="max-width:500px;margin:1rem auto;display:block">
+      <rect width="500" height="400" fill="#1a2a1a" rx="8"/>
+
+      <!-- 간이 다이아몬드 -->
+      <polygon points="250,350 400,220 250,90 100,220" fill="none" stroke="#4a8c2a" stroke-width="2"/>
+
+      <!-- 베이스 -->
+      <rect x="245" y="345" width="10" height="10" fill="white" transform="rotate(45,250,350)"/>
+      <rect x="395" y="215" width="10" height="10" fill="white" transform="rotate(45,400,220)"/>
+      <rect x="245" y="85" width="10" height="10" fill="white" transform="rotate(45,250,90)"/>
+      <rect x="95" y="215" width="10" height="10" fill="white" transform="rotate(45,100,220)"/>
+
+      <!-- 마운드 -->
+      <circle cx="250" cy="260" r="8" fill="#d4a574"/>
+
+      <!-- 돌진하는 선수들 -->
+      <!-- 1루수 돌진 -->
+      <circle cx="380" cy="240" r="10" fill="#f5a623" opacity="0.5"/>
+      <circle r="10" fill="#f5a623">
+        <animate attributeName="cx" values="380;310;310" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="240;310;310" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="385" y="230" fill="#f5a623" font-size="9">1B 돌진</text>
+
+      <!-- 3루수 돌진 -->
+      <circle cx="130" cy="240" r="10" fill="#f5a623" opacity="0.5"/>
+      <circle r="10" fill="#f5a623">
+        <animate attributeName="cx" values="130;200;200" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="240;310;310" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="95" y="230" fill="#f5a623" font-size="9">3B 돌진</text>
+
+      <!-- 투수 -->
+      <circle cx="250" cy="260" r="10" fill="#e94560"/>
+      <text x="250" y="264" fill="white" font-size="8" text-anchor="middle">P</text>
+      <text x="260" y="252" fill="#e94560" font-size="9">중앙 커버</text>
+
+      <!-- 2루수 → 1루 커버 -->
+      <circle r="10" fill="#5bc0eb">
+        <animate attributeName="cx" values="330;390;390" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="190;220;220" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="335" y="180" fill="#5bc0eb" font-size="9">2B→1루 커버</text>
+
+      <!-- 유격수 → 2루 커버 -->
+      <circle r="10" fill="#5bc0eb">
+        <animate attributeName="cx" values="200;250;250" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="cy" values="190;100;100" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="160" y="180" fill="#5bc0eb" font-size="9">SS→2루 커버</text>
+
+      <!-- 주자 1루 -->
+      <circle cx="400" cy="220" r="6" fill="#e94560" class="pulse-dot"/>
+      <text x="415" y="215" fill="#e94560" font-size="9">주자</text>
+    </svg>
+    <p class="description"><strong style="color:#f5a623">사전 약속 필수:</strong> "누가 잡든 어디로 던질지" 미리 정해야 합니다!</p>
+  </div>
+
+  <!-- 주자 2루 상황 -->
+  <div class="play-diagram fade-in">
+    <h3>주자 2루, 무사/1사 — 내야 전진 수비</h3>
+    <svg viewBox="0 0 500 350" style="max-width:500px;margin:1rem auto;display:block">
+      <rect width="500" height="350" fill="#1a2a1a" rx="8"/>
+
+      <!-- 다이아몬드 -->
+      <polygon points="250,300 380,200 250,100 120,200" fill="none" stroke="#4a8c2a" stroke-width="2"/>
+
+      <!-- 내야수 원래 위치 (투명) -->
+      <circle cx="350" cy="210" r="8" fill="#f5a623" opacity="0.2"/>
+      <circle cx="310" cy="170" r="8" fill="#f5a623" opacity="0.2"/>
+      <circle cx="190" cy="170" r="8" fill="#f5a623" opacity="0.2"/>
+      <circle cx="150" cy="210" r="8" fill="#f5a623" opacity="0.2"/>
+
+      <!-- 내야수 전진 위치 -->
+      <circle cx="340" cy="240" r="10" fill="#f5a623"/>
+      <text x="340" y="244" fill="white" font-size="8" text-anchor="middle">1B</text>
+      <circle cx="300" cy="220" r="10" fill="#f5a623"/>
+      <text x="300" y="224" fill="white" font-size="8" text-anchor="middle">2B</text>
+      <circle cx="200" cy="220" r="10" fill="#f5a623"/>
+      <text x="200" y="224" fill="white" font-size="8" text-anchor="middle">SS</text>
+      <circle cx="160" cy="240" r="10" fill="#f5a623"/>
+      <text x="160" y="244" fill="white" font-size="8" text-anchor="middle">3B</text>
+
+      <!-- 전진 화살표 -->
+      <line x1="350" y1="215" x2="340" y2="235" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="310" y1="175" x2="300" y2="215" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="190" y1="175" x2="200" y2="215" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="150" y1="215" x2="160" y2="235" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+      <!-- 주자 2루 -->
+      <circle cx="250" cy="100" r="8" fill="#e94560" class="pulse-dot"/>
+      <text x="265" y="98" fill="#e94560" font-size="10">주자 2루</text>
+
+      <!-- 홈 판단 화살표 -->
+      <path d="M 250 230 Q 250 270 250 300" stroke="#6bce3a" stroke-width="2" fill="none" stroke-dasharray="6,3">
+        <animate attributeName="stroke-dashoffset" from="18" to="0" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <text x="260" y="275" fill="#6bce3a" font-size="10" font-weight="bold">홈 송구 우선!</text>
+
+      <!-- 판단 박스 -->
+      <rect x="30" y="280" width="180" height="55" rx="8" fill="rgba(0,0,0,0.5)" stroke="#e94560"/>
+      <text x="120" y="298" fill="#e94560" font-size="10" text-anchor="middle" font-weight="bold">판단 원칙</text>
+      <text x="120" y="313" fill="#ccc" font-size="9" text-anchor="middle">홈 가능 → 홈 송구</text>
+      <text x="120" y="328" fill="#ccc" font-size="9" text-anchor="middle">홈 늦으면 → 1루 확실히</text>
+    </svg>
+    <p class="description"><strong style="color:#e94560">절대 중간에 멈추지 말 것!</strong> 던지든가 말든가, 빠르게 판단하세요.</p>
+  </div>
+</section>
+
+<!-- Section 4: Interactive Situation -->
+<section id="interactive">
+  <h2 class="section-title fade-in">Part 4. 상황별 수비 시뮬레이터</h2>
+  <p class="section-subtitle fade-in">상황을 선택하면 각 포지션이 어떻게 움직여야 하는지 확인하세요</p>
+
+  <div class="interactive-field fade-in">
+    <div class="field-btn-group">
+      <button class="field-btn active" onclick="showSituation('normal')">기본 포지셔닝</button>
+      <button class="field-btn" onclick="showSituation('bunt')">번트 예상</button>
+      <button class="field-btn" onclick="showSituation('runner2')">주자 2루</button>
+      <button class="field-btn" onclick="showSituation('double')">더블플레이</button>
+      <button class="field-btn" onclick="showSituation('steal')">도루 대비</button>
+    </div>
+
+    <div id="situation-info" class="situation-info">
+      <h4>기본 포지셔닝</h4>
+      <p>각 포지션은 기본 위치에서 타자의 성향에 따라 미세 조정합니다.</p>
+      <ul>
+        <li>우타자: 전체적으로 약간 왼쪽(3루 쪽)으로 시프트</li>
+        <li>좌타자: 전체적으로 약간 오른쪽(1루 쪽)으로 시프트</li>
+        <li>레디 포지션: 무릎을 구부리고 체중을 앞에</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Drills -->
+<section id="drills">
+  <h2 class="section-title fade-in">Part 5. 연습 메뉴</h2>
+  <p class="section-subtitle fade-in">팀 연습 + 개인 연습(집에서도 가능)</p>
+
+  <h3 style="color:var(--accent);margin-bottom:1rem;font-size:1.1rem" class="fade-in">팀 연습</h3>
+  <div class="drill-grid fade-in">
+    <div class="drill-card">
+      <h4>캐치볼 (정확한 폼)</h4>
+      <span class="time">15분</span>
+      <p>4심 그립 확인, 스텝-회전-릴리즈 일관성. 대충 던지면 대충 익혀집니다!</p>
+    </div>
+    <div class="drill-card">
+      <h4>땅볼 펀더멘탈</h4>
+      <span class="time">15분</span>
+      <p>정면 이동 → 글러브 다운 → 양손 캐치 → 스텝 → 송구. 반복이 왕도!</p>
+    </div>
+    <div class="drill-card">
+      <h4>플라이볼 추적</h4>
+      <span class="time">10분</span>
+      <p>뒤로 빠지며 잡기 + 크로스 스텝 출발 연습. 외야수 필수 드릴!</p>
+    </div>
+    <div class="drill-card">
+      <h4>PFP (투수 수비)</h4>
+      <span class="time">10분</span>
+      <p>번트 처리, 1루 커버(호를 그리며), 컴백 라이너 반응 연습</p>
+    </div>
+    <div class="drill-card">
+      <h4>중계 플레이</h4>
+      <span class="time">15분</span>
+      <p>외야 → 중계 → 홈/3루. 실전처럼 콜("컷!", "릴레이!") 포함!</p>
+    </div>
+    <div class="drill-card">
+      <h4>상황 시뮬레이션</h4>
+      <span class="time">10분</span>
+      <p>"주자 2루, 1사!" 콜 → 각자 포지셔닝 → 타구에 따라 움직임 연습</p>
+    </div>
+  </div>
+
+  <h3 style="color:#6bce3a;margin:2rem 0 1rem;font-size:1.1rem" class="fade-in">개인 연습 (집에서도 가능)</h3>
+  <div class="drill-grid fade-in">
+    <div class="drill-card" style="border-color:rgba(107,206,58,0.3)">
+      <h4>벽 던지기</h4>
+      <p>벽에 공 던지고 받기 반복. 핸들링 + 반응속도 동시 향상</p>
+    </div>
+    <div class="drill-card" style="border-color:rgba(107,206,58,0.3)">
+      <h4>소프트 핸드 드릴</h4>
+      <p>테니스공을 맨손으로 바닥에 튀겨 잡기. 부드러운 글러브 핸들링!</p>
+    </div>
+    <div class="drill-card" style="border-color:rgba(107,206,58,0.3)">
+      <h4>풋워크 래더</h4>
+      <p>사다리 훈련으로 민첩성 향상. 수비 범위 확대에 직접적 효과!</p>
+    </div>
+    <div class="drill-card" style="border-color:rgba(107,206,58,0.3)">
+      <h4>4심 그립 자동화</h4>
+      <p>공을 꺼내는 순간 자동으로 4심 그립이 잡히도록 수백 번 반복</p>
+    </div>
+    <div class="drill-card" style="border-color:rgba(107,206,58,0.3)">
+      <h4>스쿼트 & 런지</h4>
+      <p>하체 근력 = 수비 범위. 일주일 3회, 각 3세트 추천</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: Trivia -->
+<section id="trivia">
+  <h2 class="section-title fade-in">Part 6. 재미있는 야구 트리비아</h2>
+  <p class="section-subtitle fade-in">클릭하면 답이 나옵니다!</p>
+
+  <div class="fade-in">
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">"Can of Corn"이 뭘 뜻할까?</div>
+      <div class="a">쉬운 플라이볼! 옛날 가게에서 높은 선반의 캔을 떨어뜨려 받던 것에서 유래된 표현입니다.</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">왜 1루로 반시계 방향으로 뛸까?</div>
+      <div class="a">오른손잡이가 다수인 인류 특성상, 왼쪽으로 도는 것이 더 자연스럽기 때문이라는 설이 유력합니다. 또한 오른손 타자가 스윙 후 자연스러운 회전 방향이기도 합니다.</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">"Lip"이 뭔지 아시나요?</div>
+      <div class="a">내야 흙과 외야 잔디의 경계선을 "lip"이라 부릅니다. 여기서 타구가 튀면 예측 불가능한 바운드가 발생! 내야수는 이 구간에서 절대 중간 바운드로 잡지 마세요.</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">"5.5홀" 수비란?</div>
+      <div class="a">3루수(5번)와 유격수(6번) 사이를 5.5홀이라 부릅니다. 당겨치는 우타자에게 가장 많은 안타가 나오는 구간! 수비 시프트의 핵심 포인트입니다.</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">MLB에서 통계적으로 가장 어려운 수비 플레이는?</div>
+      <div class="a">"배릴 존 타구를 3루수가 역싱글 방지하며 잡아 1루 송구" — 성공률 약 25%! 3루수가 "핫 코너"라 불리는 이유입니다.</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">역대 가장 많은 에러를 기록한 포지션은?</div>
+      <div class="a">유격수(Shortstop)! 처리 범위가 넓고 송구 거리가 길기 때문입니다. 반대로 가장 적은 에러는 당연히 지명타자(DH)... 수비를 안 하니까요!</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+
+    <div class="trivia-card" onclick="this.classList.toggle('open')">
+      <div class="q">중견수가 "콜 우선권"을 갖는 이유는?</div>
+      <div class="a">중견수는 좌·우익수 사이에 위치해 전체 외야를 조망할 수 있고, 앞으로 달려오면서 잡는 것이 뒤로 빠지며 잡는 것보다 안정적이기 때문입니다. "I got it!" 소리가 들리면 양보!</div>
+      <div class="hint">클릭하여 답 확인</div>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section>
+  <div class="summary-box fade-in">
+    <h3>핵심은 딱 4가지</h3>
+    <p style="color:#ccc">4부리그에서 실력 차이를 만드는 건 화려한 플레이가 아닙니다</p>
+    <div class="four-keys">
+      <div class="key-item">
+        <div class="emoji">&#127919;</div>
+        <div class="label">정면에서 잡기</div>
+        <div class="desc">공의 정면에서 양손으로</div>
+      </div>
+      <div class="key-item">
+        <div class="emoji">&#127942;</div>
+        <div class="label">정확한 송구</div>
+        <div class="desc">4심 그립, 스텝, 목표</div>
+      </div>
+      <div class="key-item">
+        <div class="emoji">&#129504;</div>
+        <div class="label">상황 판단</div>
+        <div class="desc">던지기 전에 생각하기</div>
+      </div>
+      <div class="key-item">
+        <div class="emoji">&#127939;</div>
+        <div class="label">백업</div>
+        <div class="desc">공이 안 와도 움직이기</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  사회인 야구 수비 가이드 | KFA Baseball | 2026
+</footer>
+
+<script>
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Position click handler
+const positionData = {
+  pitcher: {
+    title: '투수 (P)',
+    tips: [
+      'PFP: 투구 후 반드시 수비 자세로 복귀',
+      '1루 커버 시 직선이 아닌 호(弧)를 그리며 접근',
+      '번트 수비: 3루 쪽 번트 → 1루 송구가 기본',
+      '컴백 라인드라이브 대비: 글러브를 얼굴 앞에'
+    ]
+  },
+  catcher: {
+    title: '포수 (C)',
+    tips: [
+      '프레이밍: 글러브를 스트라이크존 쪽으로 미세하게 당기기',
+      '블로킹: 글러브로 잡지 말고 몸으로 막기',
+      '팝업: 스핀 방향 고려, 등을 필드 쪽으로',
+      '주자 2루 시 인디케이터 사인 사용'
+    ]
+  },
+  first: {
+    title: '1루수 (1B)',
+    tips: [
+      '스트레칭: 반대편 발로 베이스 밟고 최대한 뻗기',
+      '숏바운드: 원바운드 송구는 무조건 앞에서 차단',
+      '3-1 플레이: 번트 돌진 시 2루수/투수와 커버 약속 필수',
+      '파울 팝업: 관중석 방향으로 회전하므로 주의'
+    ]
+  },
+  second: {
+    title: '2루수 (2B)',
+    tips: [
+      '더블플레이 피벗: 베이스 밟는 타이밍과 주자 피하는 스텝',
+      '릴레이 위치: 외야-홈 직선상에 서기',
+      '1루 커버: 번트 상황 시 1루수 대신 커버',
+      '우중간 타구 시 중계 위치로 이동'
+    ]
+  },
+  short: {
+    title: '유격수 (SS)',
+    tips: [
+      '가장 넓은 수비 범위를 커버하는 포지션',
+      '더블플레이: 2루 베이스 피벗 후 빠른 1루 송구',
+      '좌중간 타구 중계: 외야-3루/홈 직선상 위치',
+      '팝업 우선권: 2루수보다 유격수가 우선'
+    ]
+  },
+  third: {
+    title: '3루수 (3B)',
+    tips: [
+      '가장 빠른 타구가 오는 포지션 - 레디 자세 필수',
+      '번트 돌진: 라인 쪽 번트 담당, 강하게 잡아 1루 강송구',
+      '역싱글 방지: 파울라인 가까이 서는 것도 전략',
+      '체중을 앞에 두고 무릎을 구부린 자세 유지'
+    ]
+  },
+  left: {
+    title: '좌익수 (LF)',
+    tips: [
+      '첫 발은 뒤로! 머리 위 넘어가면 복구 불가',
+      '3루 백업이 주요 책임',
+      '좌측 파울라인 타구 처리',
+      '크로우 홉으로 정확한 송구 자세 만들기'
+    ]
+  },
+  center: {
+    title: '중견수 (CF)',
+    tips: [
+      '외야 플라이 최우선 콜 권한!',
+      '좌·우익수 백업이 핵심 역할',
+      '가장 넓은 외야 범위 커버',
+      '2루 송구 연습 필수 - 가장 긴 송구 거리'
+    ]
+  },
+  right: {
+    title: '우익수 (RF)',
+    tips: [
+      '1루 백업이 주요 책임',
+      '1루 송구가 가장 중요한 외야 포지션',
+      '우측 파울라인 타구 처리',
+      '강한 어깨 필요 - 3루 송구 거리가 가장 김'
+    ]
+  }
+};
+
+document.querySelectorAll('.pos-marker').forEach(marker => {
+  marker.addEventListener('click', function() {
+    const pos = this.getAttribute('data-pos');
+    const data = positionData[pos];
+    if (!data) return;
+
+    const detail = document.getElementById('position-detail');
+    let html = `<h4>${data.title}</h4><ul>`;
+    data.tips.forEach(tip => {
+      html += `<li>${tip}</li>`;
+    });
+    html += '</ul>';
+    detail.innerHTML = html;
+    detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+});
+
+// Situation simulator
+function showSituation(type) {
+  document.querySelectorAll('.field-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const info = document.getElementById('situation-info');
+  const situations = {
+    normal: {
+      title: '기본 포지셔닝',
+      desc: '각 포지션은 기본 위치에서 타자의 성향에 따라 미세 조정합니다.',
+      tips: [
+        '우타자: 전체적으로 약간 왼쪽(3루 쪽)으로 시프트',
+        '좌타자: 전체적으로 약간 오른쪽(1루 쪽)으로 시프트',
+        '레디 포지션: 무릎을 구부리고 체중을 앞에',
+        '투수의 투구와 동시에 한 발 앞으로 스텝 (크리핑)'
+      ]
+    },
+    bunt: {
+      title: '번트 예상 상황',
+      desc: '1루수와 3루수가 동시에 돌진합니다. 나머지는 베이스 커버!',
+      tips: [
+        '1루수: 홈 방향으로 돌진 (번트 커버)',
+        '3루수: 홈 방향으로 돌진 (라인 쪽 번트)',
+        '2루수: 1루 베이스 커버로 이동',
+        '유격수: 2루 베이스 커버로 이동',
+        '투수: 마운드 앞 중앙 번트 담당',
+        '★ 핵심: "누가 잡든 어디로 던질지" 사전 약속!'
+      ]
+    },
+    runner2: {
+      title: '주자 2루 (무사/1사) — 전진 수비',
+      desc: '내야수를 앞으로 당겨 세워 홈 송구를 우선 노립니다.',
+      tips: [
+        '내야수 전체를 베이스라인 앞으로 전진 배치',
+        '땅볼 → 홈 송구 가능 여부 즉시 판단',
+        '홈 늦으면 → 1루로 확실히 하나 잡기',
+        '절대 중간에 멈추지 말 것! 던지든가 말든가!',
+        '외야 플라이 시 태그업 대비 필수'
+      ]
+    },
+    double: {
+      title: '더블플레이 상황',
+      desc: '주자 1루, 0-1사. 6-4-3 또는 4-6-3 병살을 노립니다.',
+      tips: [
+        '2루수/유격수: 2루 베이스 근처로 미리 이동',
+        '땅볼 → 가장 가까운 야수가 2루로 송구',
+        '2루 피벗: 베이스 밟으며 바로 1루 전송',
+        '주자 슬라이딩 피하기 위한 스텝 연습 필수',
+        '1루수: 3-6-3 병살 대비 (본인이 잡고 2루→1루)'
+      ]
+    },
+    steal: {
+      title: '도루 대비',
+      desc: '포수의 빠른 송구와 내야수의 베이스 커버가 핵심입니다.',
+      tips: [
+        '포수: 빠르게 일어나며 2루 송구 (팝 타임 단축)',
+        '2루 도루: 유격수 or 2루수가 베이스 커버 (사전 약속)',
+        '커버 신호: 글러브로 입 가리고 사인 교환',
+        '투수: 슬라이드 스텝으로 투구 동작 단축',
+        '피치아웃: 의심되면 바깥으로 빠지는 공 요청'
+      ]
+    }
+  };
+
+  const data = situations[type];
+  let html = `<h4>${data.title}</h4><p>${data.desc}</p><ul>`;
+  data.tips.forEach(tip => {
+    html += `<li>${tip}</li>`;
+  });
+  html += '</ul>';
+  info.innerHTML = html;
+}
+
+// Hide trivia hints when opened
+document.querySelectorAll('.trivia-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const hint = this.querySelector('.hint');
+    if (this.classList.contains('open')) {
+      hint.style.display = 'none';
+    } else {
+      hint.style.display = 'block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

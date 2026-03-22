@@ -1,4 +1,4 @@
-import { schedule } from '../data/teamData';
+import { schedule, teamInfo } from '../data/teamData';
 
 export default function Schedule() {
   return (
@@ -52,11 +52,17 @@ export default function Schedule() {
             <h3>주차장</h3>
             <p>P6 주차장 이용<br/>(부산 사상구 삼락동 29-58)</p>
           </div>
-          <div className="info-card">
+          <a
+            className="info-card"
+            href={teamInfo.gameOneUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+          >
             <div className="info-icon">📱</div>
             <h3>기록 플랫폼</h3>
             <p>게임원(GameOne)<br/>실시간 기록 확인</p>
-          </div>
+          </a>
           <div className="info-card">
             <div className="info-icon">👕</div>
             <h3>유니폼</h3>
