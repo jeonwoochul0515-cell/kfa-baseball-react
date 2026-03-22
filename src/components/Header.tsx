@@ -6,6 +6,7 @@ const navItems = [
   { label: '일정', href: '#schedule' },
   { label: '선수단', href: '#roster' },
   { label: '운영진', href: '#staff' },
+  { label: '수비가이드', href: '#guide' },
   { label: '연혁', href: '#history' },
   { label: '장비', href: '#equipment' },
   { label: '회계', href: '#finance' },

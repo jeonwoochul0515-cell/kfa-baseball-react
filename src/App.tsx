@@ -10,6 +10,7 @@ import Sponsors from './components/Sponsors';
 import Members from './components/Members';
 import Equipment from './components/Equipment';
 import Finance from './components/Finance';
+import BaseballGuide from './components/BaseballGuide';
 import Footer from './components/Footer';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Schedule />
       <Roster />
       <Staff />
+      <BaseballGuide />
       <Timeline />
       <Equipment />
       <Finance />
