@@ -97,10 +97,23 @@ export const players: Player[] = [
   { name: '이성현', number: '1', position: '내야수', brand: '라온리원', height: 178, topSize: 115, bottomSize: 33, capSize: 60, role: '총무겸 마스터' },
   { name: '김시운', number: '3', position: '내야수', brand: '하루솥밥', height: 175, topSize: 110, bottomSize: 32, capSize: 58, role: '부총무' },
   { name: '송창진', number: '888', position: '내야수', brand: '국밥의모든것', height: 175, topSize: 120, bottomSize: 35, capSize: 60, role: '감독' },
+  { name: '변기원', number: '0', position: '내야수', brand: '원카츠', height: 175, topSize: 115, bottomSize: 34, capSize: 58, role: '2026.03.24 입단' },
 ];
 
 // 경기 결과 (게임원 동기화 + 수동 보완)
 export const matchResults: MatchResult[] = [
+  {
+    date: '2026-04-04',
+    opponent: '벙커스',
+    score: '- : -',
+    result: 'draw',
+    type: 'league',
+    venue: '삼락A구장',
+    highlights: [
+      '우천취소 (전날 밤~오전 강수)',
+      '리그 운영진에 의해 별도 일정 재배정 예정',
+    ]
+  },
   {
     date: '2026-03-21',
     opponent: '골드문',
@@ -113,8 +126,10 @@ export const matchResults: MatchResult[] = [
       '창단 첫 공식 리그전 콜드승!',
       'MVP 안동석 - 안타와 병살 플레이 혼신',
       '16점 다득점 콜드 승리',
-      '포카리스웨트 찬조 (석용호 대표)',
-      '바로주방 김태용 대표 회식비 찬조',
+      '포카리스웨트/생수 찬조 (석용호 대표)',
+      '떡 간식 찬조 (전우철 대표, 김창희 변호사)',
+      '바로주방 김태용 대표 1차 올바로갈비 회식비 찬조',
+      '안동석 대표 2차 호맥 회식비 찬조',
     ]
   },
   {
@@ -145,7 +160,7 @@ export const schedule: ScheduleItem[] = [
   { date: '2026-05-30', time: '11:30', opponent: '뷰글러스 야구단', venue: '삼락A구장', type: 'league' },
   { date: '2026-05-02', time: '13:30', opponent: 'W.B', venue: '삼락A구장', type: 'league' },
   { date: '2026-04-18', time: '13:30', opponent: '더스틴', venue: '삼락A구장', type: 'league' },
-  { date: '2026-04-04', time: '11:30', opponent: '벙커스', venue: '삼락A구장', type: 'league' },
+  { date: '2026-04-04', time: '11:30', opponent: '벙커스 (우천취소, 재배정 예정)', venue: '삼락A구장', type: 'league' },
 ];
 
 // 스폰서
@@ -156,6 +171,8 @@ export const sponsors: Sponsor[] = [
   { name: '기라디자인', person: '김길하 대표', contribution: '야구단 로고/디자인 전담, 장비 개인 투자 84만원' },
   { name: '올바로갈비', person: '유종우 대표', contribution: '창단식 및 회식 장소 제공' },
   { name: '법률사무소청송law', person: '김창희 변호사', contribution: '개막식 떡 4박스 후원' },
+  { name: '청송종합식품', person: '전우철 대표', contribution: '개막전 떡 간식 찬조, 홈페이지 제작' },
+  { name: '호맥', person: '이주환 대표', contribution: '개막전 2차 회식 장소 제공' },
 ];
 
 // 연혁
@@ -170,6 +187,9 @@ export const timeline: TimelineEvent[] = [
   { date: '2026.02.10', title: '감독자 회의 참석', description: '영도구청에서 리그 감독자 회의. 4부 2개조 운영, 나풀(81년생~) 규정 확인.', icon: '📋' },
   { date: '2026.03.08', title: '연습경기 대승', description: '화명생태공원 야구장B에서 연습경기 14:6 대승!', icon: '🏆' },
   { date: '2026.03.21', title: '리그 개막전 콜드승!', description: 'vs 골드문 16:6 콜드 대승! MVP 안동석. 창단 첫 공식전 승리!', icon: '🔥' },
+  { date: '2026.03.24', title: '실내 연습 & 신규 입단', description: 'H&C 베이스볼 아카데미(금정구)에서 첫 실내연습. 변기원 선수 입단!', icon: '🏋️' },
+  { date: '2026.04.02', title: '추가 회비 수금', description: '운영자금 확보를 위한 추가 회비 20만원 수금. 거제도 야구캠프, 오키나와 전지훈련 계획.', icon: '💰' },
+  { date: '2026.04.04', title: '리그 2차전 우천취소', description: 'vs 벙커스 경기 우천취소. 전날 밤부터 오전까지 강수로 경기 불가.', icon: '🌧️' },
 ];
 
 // 팀 기본 정보
@@ -180,9 +200,9 @@ export const teamInfo = {
   founded: '2025년 11월 27일',
   homeGround: '삼락생태공원 야구장',
   address: '부산 사상구 삼락동',
-  totalMembers: 32,
-  registeredPlayers: 25,
-  dues: '30만원 (입회비)',
+  totalMembers: 33,
+  registeredPlayers: 26,
+  dues: '30만원 (입회비) + 추가회비 20만원',
   account: '카카오뱅크 3333230368614 (예금주: 송창진)',
   mascotConcept: '라부부 캐릭터 (KFA 띠 착용)',
   youtubeChannel: '기라튜브 (김길하 코치)',
@@ -218,10 +238,10 @@ export const equipmentList: EquipmentItem[] = [
 
 // 재무 요약
 export const finances: FinanceSummary = {
-  totalIncome: 1000000, // 바로주방 협찬금 등
+  totalIncome: 5800000, // 바로주방 협찬금 100만 + 추가회비 24명 × 20만 = 480만
   totalExpense: 842000, // 장비 구매 합계
-  balance: 158000,
-  lastUpdated: '2026-03-22',
+  balance: 4958000,
+  lastUpdated: '2026-04-05',
 };
 
 // 회원사 리스트 (브랜드)
@@ -232,5 +252,5 @@ export const memberCompanies = [
   '하루솥밥', '공감부동산', '더상자', 'JJ푸드빌', '명성가',
   '호맥', '고기재이', '푸른뜨레', '호떡여장군', '이음푸드',
   '케이닥', '사해방', '세융푸드', '청송종합식품', '디에이블',
-  '금보물산', '도조도모', '법률사무소청송law',
+  '금보물산', '도조도모', '법률사무소청송law', '원카츠',
 ];
