@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kfa-baseball-v1';
+const CACHE_NAME = 'kfa-baseball-v2';
 
 // Install: cache app shell
 self.addEventListener('install', (event) => {
