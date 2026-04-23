@@ -25,6 +25,7 @@ export default function BaseballGuide() {
                 <span style={{ background: 'rgba(74,140,42,0.2)', color: '#6bce3a' }}>포지션별 노하우</span>
                 <span style={{ background: 'rgba(212,168,67,0.2)', color: '#f0cc6b' }}>애니메이션 다이어그램</span>
                 <span style={{ background: 'rgba(91,192,235,0.2)', color: '#5bc0eb' }}>연습 메뉴</span>
+                <span style={{ background: 'rgba(245,166,35,0.25)', color: '#f5a623' }}>세이버메트릭스 16</span>
               </div>
               <button className="guide-banner-btn" onClick={openGuide}>
                 가이드 보기
@@ -92,6 +93,10 @@ export default function BaseballGuide() {
             <div className="guide-feature">
               <div className="guide-feature-num">11</div>
               <div className="guide-feature-label">연습 메뉴</div>
+            </div>
+            <div className="guide-feature">
+              <div className="guide-feature-num">16</div>
+              <div className="guide-feature-label">고급 전략</div>
             </div>
           </div>
         </div>

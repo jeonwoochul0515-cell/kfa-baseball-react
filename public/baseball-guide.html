@@ -577,6 +577,7 @@
   <a href="#interactive">인터랙티브</a>
   <a href="#drills">연습 메뉴</a>
   <a href="#trivia">트리비아</a>
+  <a href="#advanced" style="color:#f5a623">고급 전략</a>
 </nav>
 
 <!-- Hero -->
@@ -1388,6 +1389,245 @@
       <div class="a">네, 가능합니다! 같은 이닝 내에서도 <strong>투수-야수 간 포지션 교환</strong>이 가능합니다. 단, 투수가 다른 포지션으로 갔다가 다시 마운드에 올라가면 이전 투구 수가 누적됩니다. 사회인 야구에서는 선수 체력 관리를 위해 자주 활용되는 전략입니다.</div>
       <div class="hint">클릭하여 답 확인</div>
     </div>
+  </div>
+</section>
+
+<!-- Section 7: Advanced / 고차원 야구 상식 -->
+<section id="advanced">
+  <h2 class="section-title fade-in">Part 7. 고차원 야구 상식 &amp; 전략</h2>
+  <p class="section-subtitle fade-in">세이버메트릭스·기대값·전술 — 알면 한 단계 도약하는 심화편</p>
+
+  <div class="card-grid">
+
+    <div class="card fade-in">
+      <span class="card-number">01</span>
+      <span class="tag">세이버</span>
+      <h3>기대 득점 매트릭스 (Run Expectancy)</h3>
+      <p>주자·아웃 조합별 <strong style="color:#f5a623">평균 기대 득점</strong>. 번트·도루·스퀴즈 판단의 기준표입니다.</p>
+      <table style="width:100%;margin-top:0.8rem;font-size:0.82rem;border-collapse:collapse">
+        <thead>
+          <tr style="background:rgba(245,166,35,0.1)">
+            <th style="padding:0.35rem;border-bottom:1px solid #444;text-align:left">상황</th>
+            <th style="padding:0.35rem;border-bottom:1px solid #444">0 out</th>
+            <th style="padding:0.35rem;border-bottom:1px solid #444">1 out</th>
+            <th style="padding:0.35rem;border-bottom:1px solid #444">2 out</th>
+          </tr>
+        </thead>
+        <tbody style="color:#ccc">
+          <tr><td style="padding:0.3rem">주자 없음</td><td style="text-align:center">0.47</td><td style="text-align:center">0.25</td><td style="text-align:center">0.10</td></tr>
+          <tr><td style="padding:0.3rem">1루</td><td style="text-align:center">0.85</td><td style="text-align:center">0.51</td><td style="text-align:center">0.22</td></tr>
+          <tr><td style="padding:0.3rem">2루</td><td style="text-align:center">1.07</td><td style="text-align:center">0.66</td><td style="text-align:center">0.31</td></tr>
+          <tr><td style="padding:0.3rem">1·3루</td><td style="text-align:center">1.66</td><td style="text-align:center">1.11</td><td style="text-align:center">0.49</td></tr>
+          <tr><td style="padding:0.3rem">만루</td><td style="text-align:center">2.27</td><td style="text-align:center">1.52</td><td style="text-align:center">0.74</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">📈 무사 만루 기대 득점 2.27점. 1점 스퀴즈로 2아웃 만들면 0.74점으로 급락 — 무사·1사에서 번트는 신중히!</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">02</span>
+      <span class="tag green">타격 지표</span>
+      <h3>BABIP — 운과 실력의 경계</h3>
+      <p><strong style="color:#6bce3a">BABIP = (안타 − 홈런) / (타수 − 삼진 − 홈런 + 희생플라이)</strong></p>
+      <p style="margin-top:0.5rem">리그 평균 <strong style="color:#f5a623">.290~.300</strong>. 이 값을 크게 벗어나면 다음 경기에서 회귀할 가능성이 높습니다.</p>
+      <ul style="margin-top:0.6rem;padding-left:1.2rem;color:#ccc;font-size:0.88rem">
+        <li>.350 이상 → 운이 좋은 타자 (거품 경계)</li>
+        <li>.270 이하 → 불운한 타자 (반등 기대)</li>
+        <li>라인드라이브 비율이 높을수록 BABIP 상승</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">03</span>
+      <span class="tag blue">투수 지표</span>
+      <h3>FIP — 순수 투수 능력</h3>
+      <p>FIP = ((13×HR) + 3×(BB+HBP) − 2×K) / IP + 상수(~3.10)</p>
+      <p style="margin-top:0.5rem">수비 운을 제외한 <strong style="color:#5bc0eb">투수가 통제 가능한 3요소(삼진·볼넷·홈런)</strong>만으로 평가.</p>
+      <p style="margin-top:0.5rem;color:#ccc;font-size:0.85rem">ERA &gt; FIP → 수비·운 덕<br/>ERA &lt; FIP → 수비가 부족했던 불운한 투수</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">04</span>
+      <span class="tag">타격 지표</span>
+      <h3>wOBA — 가중 출루율</h3>
+      <p>각 이벤트(BB, HBP, 1B, 2B, 3B, HR)에 <strong style="color:#f5a623">실제 기여 득점</strong>을 가중치로 부여한 종합 지표.</p>
+      <div style="margin-top:0.6rem;font-size:0.85rem;color:#ccc">
+        <div style="display:flex;justify-content:space-between;padding:0.25rem 0"><span>평균</span><span>.320</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.25rem 0"><span>.400 이상</span><span style="color:#6bce3a">MVP급</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.25rem 0"><span>.300 이하</span><span style="color:#e94560">백업급</span></div>
+      </div>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">💡 OPS보다 현실적 — 홈런(2.10)과 1루타(0.88)의 가치 차이를 반영</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">05</span>
+      <span class="tag green">카운트</span>
+      <h3>카운트 레버리지</h3>
+      <p>한 공으로 타율이 급변하는 카운트의 힘 (MLB 평균 기준)</p>
+      <div style="margin-top:0.8rem">
+        <div style="display:flex;justify-content:space-between;padding:0.45rem 0.6rem;background:rgba(107,206,58,0.12);border-radius:6px;margin-bottom:0.35rem">
+          <span>3-0 (타자 유리)</span><span style="color:#6bce3a;font-weight:700">.390</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.45rem 0.6rem;background:rgba(245,166,35,0.12);border-radius:6px;margin-bottom:0.35rem">
+          <span>2-0</span><span style="color:#f5a623;font-weight:700">.340</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.45rem 0.6rem;background:rgba(255,255,255,0.05);border-radius:6px;margin-bottom:0.35rem">
+          <span>1-1 (균형)</span><span style="color:#ccc">.250</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.45rem 0.6rem;background:rgba(233,69,96,0.12);border-radius:6px">
+          <span>0-2 (투수 유리)</span><span style="color:#e94560;font-weight:700">.170</span>
+        </div>
+      </div>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">📉 0-2로 가면 삼진 확률 2배. 초구 스트라이크 선점이 이토록 중요합니다.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">06</span>
+      <span class="tag blue">팀 수비</span>
+      <h3>릴레이 &amp; 컷오프 시스템</h3>
+      <p>외야 안타 시 <strong style="color:#5bc0eb">2명이 한 팀처럼</strong> 움직이는 송구 체계.</p>
+      <ul style="margin-top:0.6rem;padding-left:1.2rem;color:#ccc;font-size:0.88rem">
+        <li><strong>릴레이 맨</strong>: 외야수와 홈/3루를 잇는 직선 위</li>
+        <li><strong>컷오프 맨</strong>: 릴레이 송구를 잡아 상황 판단 (홈 vs 다른 주자)</li>
+        <li>좌중간: 유격수 릴레이 · 3루수 컷오프</li>
+        <li>우중간: 2루수 릴레이 · 1루수 컷오프</li>
+      </ul>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">💡 "Cut!" 콜이 없으면 컷오프 맨은 통과시킴. 포수의 "Go home!" 콜로 송구 진행.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">07</span>
+      <span class="tag">통계</span>
+      <h3>피타고리안 기대 승률</h3>
+      <p>득점² / (득점² + 실점²) 공식으로 <strong style="color:#f5a623">실력 기반 예상 승률</strong>을 계산합니다.</p>
+      <div style="margin-top:0.8rem;padding:0.8rem;background:rgba(15,52,96,0.35);border-radius:8px">
+        <p style="color:#5bc0eb;font-weight:700">KFA 2026 시즌 현재</p>
+        <p style="font-size:0.9rem;color:#ccc;margin-top:0.3rem">득점 <strong>25</strong>점 (16+9) · 실점 <strong>26</strong>점 (6+20)</p>
+        <p style="font-size:0.9rem;color:#ccc;margin-top:0.2rem">기대 승률 = 25² / (25² + 26²) = <strong style="color:#f5a623">48.0%</strong></p>
+        <p style="font-size:0.82rem;color:#888;margin-top:0.4rem">실제 승률 50%와 근접 → 팀 실력이 숫자에 정직하게 반영된 상태</p>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">08</span>
+      <span class="tag green">포수</span>
+      <h3>프레이밍 — 숨은 20실점의 가치</h3>
+      <p>포수가 <strong style="color:#6bce3a">볼을 스트라이크처럼 보이게 하는 기술</strong>. MLB 상위 포수는 시즌 20~30실점의 차이를 만듭니다.</p>
+      <ul style="margin-top:0.6rem;padding-left:1.2rem;color:#ccc;font-size:0.88rem">
+        <li>글러브를 미리 잡을 위치에 준비 (이동 최소화)</li>
+        <li>공을 받은 뒤 <strong>멈춤</strong> — 존 안에서 정지</li>
+        <li>존 가장자리로 미세하게 당기기 (과하면 역효과)</li>
+        <li>몸통은 심판 시야를 가리지 않도록 낮게 유지</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">09</span>
+      <span class="tag blue">타구 분석</span>
+      <h3>Barrel — 홈런 기대치 최대 구간</h3>
+      <p>MLB Statcast가 정의한 이상적 타구: <strong style="color:#5bc0eb">타구 속도 ≥ 98mph + 발사각 26°~30°</strong></p>
+      <p style="margin-top:0.5rem;color:#ccc;font-size:0.88rem">배럴 타구 기대 타율 <strong>.822</strong> · 장타율 <strong>2.386</strong></p>
+      <div style="margin-top:0.6rem;padding:0.6rem;background:rgba(91,192,235,0.1);border-radius:6px;border-left:3px solid #5bc0eb">
+        <p style="color:#5bc0eb;font-weight:700;font-size:0.88rem">사회인 야구 적용 팁</p>
+        <p style="color:#ccc;font-size:0.85rem;margin-top:0.2rem">배트 스피드가 낮아도 <strong>발사각 15~25°</strong>만 유지하면 땅볼 아웃 비율이 급감합니다. "공을 띄운다"는 의식 대신 "공 밑을 때린다"는 스윙 궤도로.</p>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">10</span>
+      <span class="tag">전략</span>
+      <h3>히트앤런 vs 런앤히트</h3>
+      <div style="margin-top:0.6rem;display:flex;flex-direction:column;gap:0.55rem">
+        <div style="padding:0.6rem;background:rgba(245,166,35,0.1);border-radius:6px;border-left:3px solid #f5a623">
+          <p style="color:#f5a623;font-weight:700;font-size:0.9rem">Hit-and-Run (히트앤런)</p>
+          <p style="color:#ccc;font-size:0.85rem">주자 출발 → 타자 <strong>무조건 스윙</strong>. 병살 회피 + 빈 공간 안타 노림.</p>
+        </div>
+        <div style="padding:0.6rem;background:rgba(91,192,235,0.1);border-radius:6px;border-left:3px solid #5bc0eb">
+          <p style="color:#5bc0eb;font-weight:700;font-size:0.9rem">Run-and-Hit (런앤히트)</p>
+          <p style="color:#ccc;font-size:0.85rem">주자 출발 → 타자는 <strong>구종 보고 판단</strong>. 안타면 치고, 볼이면 도루 전환.</p>
+        </div>
+      </div>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">💡 카운트 1-1 · 2-1에서 성공률 최고. 사인 구분: H&amp;R은 "무조건", R&amp;H는 "선택".</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">11</span>
+      <span class="tag blue">관찰</span>
+      <h3>투수 텔(Tell) 읽기</h3>
+      <p>주자·타자 모두에게 도움이 되는 <strong style="color:#5bc0eb">무의식적 버릇 관찰</strong>.</p>
+      <ul style="margin-top:0.6rem;padding-left:1.2rem;color:#ccc;font-size:0.88rem">
+        <li>변화구 시 글러브가 약간 벌어짐 (손목 준비)</li>
+        <li>직구 시 팔꿈치 각도가 더 수직</li>
+        <li>세트 포지션에서 견제 직전 어깨선·앞발 높이 변화</li>
+        <li>피로가 쌓이면 릴리스 포인트가 낮아지고 공이 뜸</li>
+      </ul>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.8rem">💡 1~2이닝 관찰해 코치·포수와 공유하면 팀 전체가 활용 가능합니다.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">12</span>
+      <span class="tag">세이버</span>
+      <h3>TTO — Three True Outcomes</h3>
+      <p>수비와 무관한 3가지 결과: <strong style="color:#f5a623">삼진 · 볼넷 · 홈런</strong></p>
+      <p style="margin-top:0.5rem;color:#ccc;font-size:0.88rem">이 3가지 비율이 높을수록 타격이 <strong>"수비·운과 독립적"</strong>입니다. 날씨·구장·수비 영향이 작아지므로 진짜 실력 지표로 쓰입니다.</p>
+      <p style="margin-top:0.5rem;color:#888;font-size:0.82rem">💡 MLB 현대 야구에서 TTO 비율 급증이 "야구가 단조로워졌다"는 비판의 근거가 됩니다.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">13</span>
+      <span class="tag green">주루</span>
+      <h3>2루 리드 — 뒤에 남는 야수 쪽으로</h3>
+      <p>2루 주자는 <strong style="color:#6bce3a">유격수·2루수 중 베이스에서 멀어진 쪽</strong> 방향으로 리드합니다.</p>
+      <ul style="margin-top:0.6rem;padding-left:1.2rem;color:#ccc;font-size:0.88rem">
+        <li>기본 리드: 3~4보 (1루보다 넓게 가능)</li>
+        <li>안타 시 홈 득점을 위해 <strong>2차 리드</strong>를 크게</li>
+        <li>단타 시 3루에 멈춰야 하는 경우도 빈번 → <strong>3루 코치의 판단 절대 존중</strong></li>
+        <li>중견수·우익수 위치 체크 후 리드 방향 결정</li>
+      </ul>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">14</span>
+      <span class="tag blue">고급 지표</span>
+      <h3>WPA — Win Probability Added</h3>
+      <p>한 타석·투구가 <strong style="color:#5bc0eb">팀 승리 확률을 얼마나 움직였는가</strong>.</p>
+      <div style="margin-top:0.6rem;padding:0.6rem;background:rgba(15,52,96,0.3);border-radius:6px">
+        <p style="color:#ccc;font-size:0.88rem">+0.30 → 승리 확률 30%p 상승 (끝내기 안타급)</p>
+        <p style="color:#ccc;font-size:0.88rem;margin-top:0.3rem">−0.25 → 결정적 실책·피홈런</p>
+      </div>
+      <p style="margin-top:0.6rem;color:#888;font-size:0.82rem">💡 누적 WPA로 "클러치 선수"를 판별. 사회인 야구 MVP 선정 시 보조 지표로 유용합니다.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">15</span>
+      <span class="tag">전략</span>
+      <h3>고의4구(IBB)의 기대값 함정</h3>
+      <p>좌타 강타자를 피해 고의4구 → 다음 타자 찬스.</p>
+      <p style="margin-top:0.5rem;color:#ccc;font-size:0.88rem">주자 2루 · 1사 기대득점 <strong>0.66</strong> → 1·2루 · 1사는 <strong>0.91</strong>로 오히려 <strong style="color:#e94560">+0.25점 증가</strong>.</p>
+      <p style="margin-top:0.5rem;color:#888;font-size:0.82rem">💡 고의4구는 "다음 타자가 병살 칠 수 있을 때"만 +가치. 병살 가능성이 없으면 오히려 손해.</p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="card-number">16</span>
+      <span class="tag green">피치 디자인</span>
+      <h3>피치 터널(Pitch Tunneling)</h3>
+      <p>서로 다른 구종을 <strong style="color:#6bce3a">같은 궤적처럼 보이게</strong> 던져 타자 판단을 늦추는 기술.</p>
+      <p style="margin-top:0.5rem;color:#ccc;font-size:0.88rem">홈 23 피트(약 7m) 지점까지 <strong>같은 지점을 통과</strong>하면, 타자가 구종을 구분하기 전에 결정을 내려야 합니다.</p>
+      <p style="margin-top:0.5rem;color:#888;font-size:0.82rem">💡 사회인 야구에서는 <strong>직구 &amp; 체인지업 조합</strong>이 가장 효과적 — 그립만 바꾸고 같은 팔 스윙.</p>
+    </div>
+
+  </div>
+
+  <div class="summary-box fade-in" style="margin-top:2.5rem">
+    <h3 style="color:#f5a623">🧠 고급편 핵심 요약</h3>
+    <p style="color:#ccc">숫자는 편견을 이깁니다. 느낌이 아니라 기댓값으로 결정하세요.</p>
+    <ul style="margin-top:1rem;padding-left:1.5rem;color:#ccc;text-align:left;max-width:600px;margin-left:auto;margin-right:auto">
+      <li><strong style="color:#f5a623">무사·1사 번트</strong>는 기대득점을 <strong>낮추는</strong> 경우가 많다</li>
+      <li><strong style="color:#6bce3a">BABIP·FIP</strong>로 "진짜 실력"과 "일시적 운"을 분리하라</li>
+      <li><strong style="color:#5bc0eb">초구 스트라이크</strong> 선점은 타율을 2배 끌어내린다</li>
+      <li><strong style="color:#e94560">발사각 15~25°</strong> — 땅볼을 줄이는 가장 직관적인 원칙</li>
+      <li><strong style="color:#f5a623">릴레이 시스템</strong>은 혼자가 아니라 둘이 완성한다</li>
+    </ul>
   </div>
 </section>
 

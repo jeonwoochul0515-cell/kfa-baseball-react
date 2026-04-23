@@ -58,7 +58,7 @@ export const staff: Staff[] = [
   { name: '송창진', role: '감독', brand: '국밥의모든것 / 도울필', description: '팀 전략 및 경기 지휘' },
   { name: '김길하', role: '수석코치', brand: '기라디자인', description: '기술지도, 장비관리, 영상촬영/편집' },
   { name: '문승우', role: '코치', brand: '더상자', description: '투수훈련, 수비포메이션 지도 (前 선수출신)' },
-  { name: '이성현', role: '총무', brand: '라온리원', description: '회계관리, 선수등록, 게임원 관리' },
+  { name: '이태경', role: '총무', brand: '라온리원', description: '회계관리, 선수등록, 게임원 관리 (구명 "이성현", 닉네임 "도노")' },
   { name: '김시운', role: '부총무', brand: '하루솥밥', description: '경기장 준비, 물품관리' },
 ];
 
@@ -94,7 +94,7 @@ export const players: Player[] = [
   { name: '문승우', number: '00', position: '투수', brand: '더상자', height: 180, topSize: 115, bottomSize: 34, capSize: 60, role: '코치겸 선수 (선출, 나풀)' },
   { name: '김영환', number: '72', position: '외야수', brand: '사해방', height: 178, topSize: 120, bottomSize: 35, capSize: 60, role: '회장' },
   { name: '김길하', number: '7', position: '내야수', brand: '기라디자인', height: 175, topSize: 115, bottomSize: 33, capSize: 60, role: '코치겸 선수' },
-  { name: '이성현', number: '1', position: '내야수', brand: '라온리원', height: 178, topSize: 115, bottomSize: 33, capSize: 60, role: '총무겸 마스터' },
+  { name: '이태경', number: '1', position: '내야수', brand: '라온리원', height: 178, topSize: 115, bottomSize: 33, capSize: 60, role: '총무겸 마스터 · 개명 전 "이성현" · 닉네임 "도노"' },
   { name: '김시운', number: '3', position: '내야수', brand: '하루솥밥', height: 175, topSize: 110, bottomSize: 32, capSize: 58, role: '부총무' },
   { name: '송창진', number: '888', position: '내야수', brand: '국밥의모든것', height: 175, topSize: 120, bottomSize: 35, capSize: 60, role: '감독' },
   { name: '변기원', number: '0', position: '내야수', brand: '원카츠', height: 175, topSize: 115, bottomSize: 34, capSize: 58, role: '2026.03.24 입단' },
@@ -102,6 +102,22 @@ export const players: Player[] = [
 
 // 경기 결과 (게임원 동기화 + 수동 보완)
 export const matchResults: MatchResult[] = [
+  {
+    date: '2026-04-18',
+    opponent: '더스틴',
+    score: '9 : 20',
+    result: 'loss',
+    type: 'league',
+    venue: '삼락A구장',
+    highlights: [
+      '리그 2차전 패배 (낙동강변토요리그 4부 B조)',
+      '선발투수 추승우 (데드볼 피격, 멍 부상)',
+      '2회초 종료 시 8:7 1점차 대량실점 흐름',
+      '이주환 4타석 무안타',
+      '참가 14명 (송창진·김길하·김시운·마경득·김범준·최준익·유종우·전우철·김태병·이태경·이주환·김형민·추승우 등, 박태우 개인사정 불참)',
+      '경기 후 특수훈련 희망자 7명 모집: 추승우·최준익·김형민·이주환·마경득·유종우·김시운',
+    ]
+  },
   {
     date: '2026-04-04',
     opponent: '벙커스',
@@ -159,8 +175,7 @@ export const schedule: ScheduleItem[] = [
   { date: '2026-06-27', time: '14:00', opponent: '김해레전드 (토)', venue: 'BPA야구장', type: 'league' },
   { date: '2026-05-30', time: '11:30', opponent: '뷰글러스 야구단', venue: '삼락A구장', type: 'league' },
   { date: '2026-05-02', time: '13:30', opponent: 'W.B', venue: '삼락A구장', type: 'league' },
-  { date: '2026-04-18', time: '13:30', opponent: '더스틴', venue: '삼락A구장', type: 'league' },
-  { date: '2026-04-04', time: '11:30', opponent: '벙커스 (우천취소, 재배정 예정)', venue: '삼락A구장', type: 'league' },
+  { date: '2026-05-01', time: '15:00', opponent: '기습연습 - 그라운드K (북구 금곡)', venue: '그라운드K 부산 북구 금곡대로16 1층', type: 'practice' },
 ];
 
 // 스폰서
@@ -190,6 +205,10 @@ export const timeline: TimelineEvent[] = [
   { date: '2026.03.24', title: '실내 연습 & 신규 입단', description: 'H&C 베이스볼 아카데미(금정구)에서 첫 실내연습. 변기원 선수 입단!', icon: '🏋️' },
   { date: '2026.04.02', title: '추가 회비 수금', description: '운영자금 확보를 위한 추가 회비 20만원 수금. 거제도 야구캠프, 오키나와 전지훈련 계획.', icon: '💰' },
   { date: '2026.04.04', title: '리그 2차전 우천취소', description: 'vs 벙커스 경기 우천취소. 전날 밤부터 오전까지 강수로 경기 불가.', icon: '🌧️' },
+  { date: '2026.04.11', title: '올바로갈비 홈페이지 오픈', description: '전우철 대표가 야구단 회원사 올바로갈비(유종우 대표) 홈페이지 제작 완료 (olbarogalbi.web.app).', icon: '🌐' },
+  { date: '2026.04.13', title: '회비 통장 변경 / 전액 이관', description: '운영 계좌 교체: 구 3333230368614 → 신 3333371347988 (카카오뱅크). 전액 5,331,814원 이관 완료.', icon: '🏦' },
+  { date: '2026.04.18', title: '리그 2차전 패배', description: 'vs 더스틴 9:20 패. 선발 추승우 (데드볼 피격). 이주환 4타석 무안타. 경기 후 특수훈련 7명 모집.', icon: '💔' },
+  { date: '2026.05.01', title: '기습연습 번개 (그라운드K)', description: '5/2 W.B전 대비 기습연습. 장소: 그라운드K 부산 북구 금곡대로16 1층. 이주환 총대.', icon: '⚡' },
 ];
 
 // 팀 기본 정보
@@ -203,7 +222,9 @@ export const teamInfo = {
   totalMembers: 33,
   registeredPlayers: 26,
   dues: '30만원 (입회비) + 추가회비 20만원',
-  account: '카카오뱅크 3333230368614 (예금주: 송창진)',
+  account: '카카오뱅크 3333371347988 (2026.04.13 변경, 전액 5,331,814원 이관)',
+  leagueRecord: '1승 1패 (승률 50%) / 2026.04.18 기준',
+  gameOneLocation: '부산 수영구 (게임원 등록 연고지)',
   mascotConcept: '라부부 캐릭터 (KFA 띠 착용)',
   youtubeChannel: '기라튜브 (김길하 코치)',
   uniformColor: '빨간색 상의 / 흰색 하의',
@@ -238,10 +259,10 @@ export const equipmentList: EquipmentItem[] = [
 
 // 재무 요약
 export const finances: FinanceSummary = {
-  totalIncome: 5800000, // 바로주방 협찬금 100만 + 추가회비 24명 × 20만 = 480만
-  totalExpense: 842000, // 장비 구매 합계
-  balance: 4958000,
-  lastUpdated: '2026-04-05',
+  totalIncome: 6200000, // 바로주방 협찬금 100만 + 추가회비 26명 × 20만 = 520만
+  totalExpense: 868186, // 신규 계좌 이관 기준 (잔액 5,331,814원에서 역산)
+  balance: 5331814, // 2026.04.13 신규 회비 계좌로 전액 이관된 금액
+  lastUpdated: '2026-04-13',
 };
 
 // 회원사 리스트 (브랜드)

@@ -7,6 +7,20 @@ export default function Hero() {
   const latestMatch = matchResults[0];
   const [videoLoaded, setVideoLoaded] = useState(false);
 
+  const leagueMatches = matchResults.filter(
+    m => m.type === 'league' && m.result !== 'draw'
+  );
+  const leagueWins = leagueMatches.filter(m => m.result === 'win').length;
+  const leagueLosses = leagueMatches.filter(m => m.result === 'loss').length;
+  const leaguePlayed = leagueWins + leagueLosses;
+
+  const resultLabel =
+    latestMatch.result === 'win'
+      ? (latestMatch.type === 'league' ? 'LEAGUE WIN' : 'PRACTICE WIN')
+      : latestMatch.result === 'loss'
+      ? 'LEAGUE LOSS'
+      : 'POSTPONED';
+
   useEffect(() => {
     const counters = statsRef.current?.querySelectorAll('.hero-stat-value');
     if (!counters) return;
@@ -95,7 +109,13 @@ export default function Hero() {
             <div className="hero-stat-label">회원사 브랜드</div>
           </div>
           <div className="hero-stat">
-            <div className="hero-stat-value" data-target="2" data-suffix="전 2승">0전 0승</div>
+            <div
+              className="hero-stat-value"
+              data-target={leaguePlayed}
+              data-suffix={`전 ${leagueWins}승 ${leagueLosses}패`}
+            >
+              0전 0승 0패
+            </div>
             <div className="hero-stat-label">시즌 전적</div>
           </div>
           <div className="hero-stat">
@@ -120,11 +140,11 @@ export default function Hero() {
             </div>
             <div className="result-score">{latestMatch.score}</div>
             <div className="result-team">
-              <div className="result-team-logo away">G</div>
+              <div className="result-team-logo away">{latestMatch.opponent.charAt(0)}</div>
               <div className="result-team-name">{latestMatch.opponent}</div>
             </div>
           </div>
-          <div className="result-type">COLD GAME WIN!</div>
+          <div className="result-type">{resultLabel}</div>
           {latestMatch.mvp && (
             <div className="result-mvp">
               <span>MVP</span>
